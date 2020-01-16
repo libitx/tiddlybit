@@ -1,6 +1,6 @@
 {
   "name": "tiddlybit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "browser": "dist/tiddlybit.min.js",
   "description": "A tiddly JavaScript library for constructing, parsing and serializing Bitcoin scripts.",
