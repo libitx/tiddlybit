@@ -1,0 +1,12 @@
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dummpy app
+test/dummy
