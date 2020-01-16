@@ -1,5 +1,5 @@
 {
-  "name": "tidlybit",
+  "name": "tiddlybit",
   "version": "0.0.1",
   "main": "index.js",
   "browser": "dist/tiddlybit.min.js",
