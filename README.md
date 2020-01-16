@@ -38,11 +38,11 @@ const {Script, OpCode} = TiddlyBit
 Constructing a new script:
 
 ```js
-const {Script, OpCode} = require('tiddlybit')
+const {Script, Ops} = require('tiddlybit')
 
 const script = new Script([
-  OpCode('OP_FALSE'),
-  OpCode('OP_RETURN'),
+  Ops.OP_FALSE,
+  Ops.OP_RETURN,
   'hello',
   'world'
 ])
@@ -74,13 +74,13 @@ const script = Script.fromHex('76a9146afc0d6bb578282ac0f6ad5c5af2294c1971210888a
 TiddlyBit also exposes a binary helper for cross-platform binary operations. See the [bops documentation](https://github.com/chrisdickinson/bops) for API details:
 
 ```js
-const {binary, Script, OpCode} = require('tiddlybit')
+const {binary, Script, Ops} = require('tiddlybit')
 
 const buf = binary.create(4)
 binary.writeUInt32LE(buf, 0x12345678, 0)
 
 const script = new Script([
-  OpCode('OP_RETURN'),
+  Ops.OP_RETURN,
   buf
 ])
 // => Script {
@@ -133,17 +133,22 @@ Searializes the script into a buffer.
 
 Searializes the script into a hex encoded string.
 
-### OpCode
+### Ops module and OpCode class
 
-TiddlyBit exposes a `OpCode()` factory function that can be be used to instantiate a new OpCode instance, either by passing a valid Op Code string or integer:
+TiddlyBit exposes a frozen `Ops` object with pre initialised `OpCode` instances for every valid code. If needed, it also exposes the `OpCode` class:
 
 ```js
-const {OpCode} = require('tiddlybit')
+const {Ops, OpCode} = require('tiddlybit')
 
-OpCode('OP_RETURN')
+Ops.OP_RETURN
 // => <OpCode 106 OP_RETURN>
 
-OpCode(106)
+// If needed you can find an OpCode by it's byte number
+Ops.byCode(106)
+// => <OpCode 106 OP_RETURN>
+
+// Alternatively you can initialise a new OpCode
+new OpCode('OP_RETURN')
 // => <OpCode 106 OP_RETURN>
 ```
 
