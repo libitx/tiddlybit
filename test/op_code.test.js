@@ -15,6 +15,7 @@ describe('new OpCode()', () => {
   })
 })
 
+
 describe('OpCode#toBuffer()', () => {
   it('must return a data buffer', () => {
     const buf = new OpCode('OP_RETURN').toBuffer()
