@@ -71,7 +71,7 @@ const script = Script.fromHex('76a9146afc0d6bb578282ac0f6ad5c5af2294c1971210888a
 //    }
 ```
 
-The `OpCode` object has properties with `OpCode` instances for every valid code. If needed, new `OpCode` instances can be created using the contructor function:
+The `OpCode` object has properties with cached instances for every valid code. If needed, new `OpCode` instances can be created using the contructor function:
 
 ```js
 const {OpCode} = require('tiddlybit')
