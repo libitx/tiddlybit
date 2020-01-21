@@ -38,11 +38,11 @@ const {Script, OpCode} = TiddlyBit
 Constructing a new script:
 
 ```js
-const {Script, Ops} = require('tiddlybit')
+const {Script, OpCode} = require('tiddlybit')
 
 const script = new Script([
-  Ops.OP_FALSE,
-  Ops.OP_RETURN,
+  OpCode.OP_FALSE,
+  OpCode.OP_RETURN,
   'hello',
   'world'
 ])
@@ -71,16 +71,33 @@ const script = Script.fromHex('76a9146afc0d6bb578282ac0f6ad5c5af2294c1971210888a
 //    }
 ```
 
+The `OpCode` object has properties with `OpCode` instances for every valid code. If needed, new `OpCode` instances can be created using the contructor function:
+
+```js
+const {OpCode} = require('tiddlybit')
+
+OpCode.OP_RETURN
+// => <OpCode 106 OP_RETURN>
+
+// If needed you can find an OpCode by it's byte number
+OpCode.byByte(106)
+// => <OpCode 106 OP_RETURN>
+
+// Alternatively you can initialise a new OpCode
+new OpCode('OP_RETURN')
+// => <OpCode 106 OP_RETURN>
+```
+
 TiddlyBit also exposes a binary helper for cross-platform binary operations. See the [bops documentation](https://github.com/chrisdickinson/bops) for API details:
 
 ```js
-const {binary, Script, Ops} = require('tiddlybit')
+const {binary, Script, OpCode} = require('tiddlybit')
 
 const buf = binary.create(4)
 binary.writeUInt32LE(buf, 0x12345678, 0)
 
 const script = new Script([
-  Ops.OP_RETURN,
+  OpCode.OP_RETURN,
   buf
 ])
 // => Script {
@@ -117,10 +134,6 @@ Parses a hex encoded script and returns a script instance.
 
 Push a single or array of chunks onto the script.
 
-#### `Script#pushOps(array)`
-
-Push a single or array of op codes (as string or integer) onto the script.
-
 #### `Script#toASM()`
 
 Searializes the script into an ASM encoded string.
@@ -133,28 +146,19 @@ Searializes the script into a buffer.
 
 Searializes the script into a hex encoded string.
 
-### Ops module and OpCode class
+### OpCode class
 
-TiddlyBit exposes a frozen `Ops` object with pre initialised `OpCode` instances for every valid code. If needed, it also exposes the `OpCode` class:
+#### `new OpCode(string)`
 
-```js
-const {Ops, OpCode} = require('tiddlybit')
+Creates an OpCode instance from the given string.
 
-Ops.OP_RETURN
-// => <OpCode 106 OP_RETURN>
+#### `OpCode.byByte(str)`
 
-// If needed you can find an OpCode by it's byte number
-Ops.byCode(106)
-// => <OpCode 106 OP_RETURN>
-
-// Alternatively you can initialise a new OpCode
-new OpCode('OP_RETURN')
-// => <OpCode 106 OP_RETURN>
-```
+Find OpCode instance by byte number.
 
 ### OpCode instance
 
-#### `Script#toBuffer()`
+#### `OpCode#toBuffer()`
 
 Searializes the Op Code into a buffer.
 

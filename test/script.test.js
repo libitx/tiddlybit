@@ -1,22 +1,22 @@
 const { assert } = require('chai')
-const { Script, Ops } = require('../index')
+const { Script, OpCode } = require('../index')
 
 
 let script1, script2;
 before(() => {
   script1 = new Script([
-    Ops.OP_FALSE,
-    Ops.OP_RETURN,
+    OpCode.OP_FALSE,
+    OpCode.OP_RETURN,
     'hello',
     'world'
   ])
 
   script2 = new Script([
-    Ops.OP_DUP,
-    Ops.OP_HASH160,
+    OpCode.OP_DUP,
+    OpCode.OP_HASH160,
     [106, 252, 13, 107, 181, 120, 40, 42, 192, 246, 173, 92, 90, 242, 41, 76, 25, 113, 33, 8],
-    Ops.OP_EQUALVERIFY,
-    Ops.OP_CHECKSIG
+    OpCode.OP_EQUALVERIFY,
+    OpCode.OP_CHECKSIG
   ])
 })
 
@@ -182,8 +182,8 @@ In a ornare quam, non gravida tortor. Phasellus hendrerit ipsum eu rutrum fermen
 
   it('must serialize and parse using hex', () => {
     const script1 = new Script([
-      Ops.OP_FALSE,
-      Ops.OP_RETURN,
+      OpCode.OP_FALSE,
+      OpCode.OP_RETURN,
       b512,
       b66000
     ])
@@ -198,8 +198,8 @@ In a ornare quam, non gravida tortor. Phasellus hendrerit ipsum eu rutrum fermen
 
   it('must serialize and parse using ASM', () => {
     const script1 = new Script([
-      Ops.OP_FALSE,
-      Ops.OP_RETURN,
+      OpCode.OP_FALSE,
+      OpCode.OP_RETURN,
       b512,
       b66000
     ])

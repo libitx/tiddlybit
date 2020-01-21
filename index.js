@@ -1,3 +1,9 @@
-const TidlyBit = require('./lib/script')
+const binary = require('bops')
+const Script = require('./lib/script')
+const OpCode = require('./lib/op_code')
 
-module.exports = TidlyBit
+module.exports = {
+  binary,
+  Script,
+  OpCode
+}
