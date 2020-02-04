@@ -9,7 +9,8 @@ export default  {
   output: {
     file: 'dist/tiddlybit.min.js',
     format: 'umd',
-    name: 'TiddlyBit'
+    name: 'TiddlyBit',
+    exports: 'named'
   },
   
   plugins: [
