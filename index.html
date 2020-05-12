@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="https://www.moneybutton.com/moneybutton.js"></script>
+  <script src="/dist/tiddlybit.min.js"></script>
+</head>
+<body>
+  <div id="button"></div>
+
+  <script>
+    const {binary, Script, OpCode} = TiddlyBit
+    const div = document.getElementById('button')
+    
+    const outputs = Array(99).fill().map((v, i) => {
+      const hex = `0${ i+1 }`.slice(-2)
+      const script = new Script([
+        OpCode.OP_FALSE,
+        OpCode.OP_RETURN,
+        binary.from(hex, 'hex')
+      ])
+      return { script: script.toASM(), amount: 0, currency: 'USD' }
+    })
+    console.log(outputs)
+
+
+    moneyButton.render(div, {
+      outputs,
+      onPayment(payment) { console.log('Payment', payment) }
+    })
+  </script>
+</body>
+</html>
